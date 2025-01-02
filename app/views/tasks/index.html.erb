@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks Index Page</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th >Tasks</th>
+      <th>Content</th>
+      <th colspan="3">Created_at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.created_at %></td>
+        <td class="show-task"><%= link_to 'Show', task %></td>
+        <td class="edit-task"><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td class="destroy-task"><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- <%= link_to 'New Task', new_task_path %> -->
