@@ -1,0 +1,66 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+    attributes:
+      task:
+        title: タイトル
+        content: 内容
+        created_at: 作成日時
+  views:
+    layout:
+      navbar:
+        tasks_index: タスク一覧
+        new_task: タスクを登録する
+    tasks:
+      index:
+        title: タスク一覧ページ
+        headers:
+          title: タイトル
+          content: 内容
+          created_at: 作成日時
+        links:
+          show: 詳細
+          edit: 編集
+          destroy: 削除
+        dialogs:
+          destroy_confirm: 本当に削除してもよろしいですか？
+      show:
+        title: タスク詳細ページ
+        labels:
+          title: タイトル
+          content: 内容
+          created_at: 作成日時
+        links:
+          edit: 編集
+          back: 戻る
+      new:
+        title: タスク登録ページ
+        labels:
+          title: タイトル
+          content: 内容
+        buttons:
+          create: 登録する
+        links:
+          back: 戻る
+      edit:
+        title: タスク編集ページ
+        labels:
+          title: タイトル
+          content: 内容
+        buttons:
+          update: 更新する
+        links:
+          back: 戻る
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する
+  errors:
+    messages:
+      blank: を入力してください
+  flash:
+    tasks:
+      create: タスクを登録しました
+      update: タスクを更新しました
+      destroy: タスクを削除しました

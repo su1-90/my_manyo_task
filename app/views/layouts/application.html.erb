@@ -11,8 +11,8 @@
 
     <body>
       <ul class="navbar-nav">
-        <li><a id="tasks-index" href="/">Tasks Index</a></li>
-        <li><a id="new-task" href="/tasks/new">New Task</a></li>
+        <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
+        <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
       </ul>
       <%= yield %>
     </body>
