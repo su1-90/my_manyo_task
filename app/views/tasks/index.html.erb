@@ -14,7 +14,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.title %></td>
+        <td class="task-title"><%= task.title %></td>
         <td><%= task.content %></td>
         <td><%= task.created_at.in_time_zone('Tokyo').strftime('%Y-%m-%d %H:%M') %></td>
         <td class="show-task"><%= link_to t("views.tasks.index.links.show"), task %></td>
