@@ -16,10 +16,10 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.created_at %></td>
+        <td><%= task.created_at.in_time_zone('Tokyo').strftime('%Y-%m-%d %H:%M') %></td>
         <td class="show-task"><%= link_to t("views.tasks.index.links.show"), task %></td>
         <td class="edit-task"><%= link_to t("views.tasks.index.links.edit"), edit_task_path(task) %></td>
-        <td class="destroy-task"><%= link_to t("views.tasks.index.links.destroy"), task, method: :delete, data: { confirm: t('views.tasks.index.dialogs.destroy_confirm') } %></td>
+        <td class="destroy-task"><%= link_to t("views.tasks.index.links.destroy"), task, method: :delete, data: { confirm: t('viewes.tasks.index.dialogs.destroy_confirm') } %></td>
       </tr>
     <% end %>
   </tbody>
