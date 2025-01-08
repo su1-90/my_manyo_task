@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
-  validates :title, presence: { message: "Title can't be blank" }
-  validates :content, presence: { message: "Content can't be blank" }
+  validates :title, presence: { message: I18n.t('errors.messages.blank') }
+  validates :content, presence: { message: I18n.t('errors.messages.blank') }
+
+  paginates_per 10
 end
