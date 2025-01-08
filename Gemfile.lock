@@ -288,7 +288,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
-  bundler (>= 2.0.0)
   byebug
   capybara (>= 2.15)
   factory_bot_rails
