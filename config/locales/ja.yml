@@ -7,6 +7,9 @@ ja:
         title: タイトル
         content: 内容
         created_at: 作成日時
+        deadline_on: 終了期限
+        priority: 優先度
+        status: ステータス
         priority_values:
           low: "低"
           medium: "中"
@@ -27,6 +30,9 @@ ja:
           title: タイトル
           content: 内容
           created_at: 作成日時
+          deadline_on: 終了期限
+          priority: 優先度
+          status: ステータス
         links:
           show: 詳細
           edit: 編集
@@ -39,6 +45,9 @@ ja:
           title: タイトル
           content: 内容
           created_at: 作成日時
+          deadline_on: 終了期限
+          priority: 優先度
+          status: ステータス
         links:
           edit: 編集
           back: 戻る
@@ -69,7 +78,11 @@ ja:
       update: 更新する
   errors:
     messages:
-      blank: を入力してください
+      blank: "%{attribute}を入力してください"
+      blank_no_attribute: "を入力してください"
+      deadline_on_blank: "を入力してください"
+      priority_blank: "を入力してください"
+      status_blank: "を入力してください"
   flash:
     tasks:
       create: タスクを登録しました

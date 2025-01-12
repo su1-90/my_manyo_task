@@ -1,6 +1,9 @@
 class Task < ApplicationRecord
-  validates :title, presence: { message: I18n.t('errors.messages.blank') }
-  validates :content, presence: { message: I18n.t('errors.messages.blank') }
+  validates :title, presence: { message: I18n.t('errors.messages.blank_no_attribute') }
+  validates :content, presence: { message: I18n.t('errors.messages.blank_no_attribute') }
+  validates :deadline_on, presence: { message: I18n.t('errors.messages.deadline_on_blank') }
+  validates :priority, presence: { message: I18n.t('errors.messages.priority_blank') }
+  validates :status, presence: { message: I18n.t('errors.messages.status_blank') }
 
   paginates_per 10
 

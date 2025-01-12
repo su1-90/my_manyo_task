@@ -17,5 +17,20 @@
   <%= @task.created_at %>
 </p>
 
+<p>
+  <strong><%= t("views.task.show.labels.deadline_on")%>:&nbsp;</strong>
+  <%= @task.deadline_on %>
+</p>
+
+<p>
+  <strong><%= t("views.tasks.show.labels.priority")%>:&nbsp;</strong>
+  <%= I18n.t("activerecord.attributes.task.priority_values.#{@task.priority}") %>
+</p>
+
+<p>
+  <strong><%= t("views.tasks.show.labels.status")%>:&nbsp;</strong>
+  <%= I18n.t("activerecord.attributes.task.status_values.#{@task.status}") %>
+</p>
+
 <%= link_to t("views.tasks.show.links.edit"), edit_task_path(@task), id: 'edit-task' %> |
 <%= link_to t("views.tasks.show.links.back"), tasks_path, id: 'back' %>
