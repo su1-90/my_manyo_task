@@ -20,6 +20,21 @@
     <%= form.text_area :content, id: 'task_content' %>
   </div>
 
+  <div class="field">
+    <%= form.label :deadline_on, t("views.tasks.new.labels.deadline_on") %>
+    <%= form.date_field :deadline_on %>
+  </div>
+
+<div class="field">
+  <%= form.label :priority, t("views.tasks.new.labels.priority") %>
+  <%= form.select :priority, I18n.t('activerecord.attributes.task.priority_values').invert.to_a, { include_blank: true, selected: nil } %>
+</div>
+
+<div class="field">
+  <%= form.label :status, t("views.tasks.new.labels.status") %>
+  <%= form.select :status, I18n.t('activerecord.attributes.task.status_values').invert.to_a, { include_blank: true, selected: nil } %>
+</div>
+
   <div class="actions">
     <% if task.new_record? %>
       <%= form.submit t("views.tasks.new.buttons.create"), id: 'create-task' %>
