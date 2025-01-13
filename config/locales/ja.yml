@@ -39,6 +39,8 @@ ja:
           destroy: 削除
         dialogs:
           destroy_confirm: 本当に削除してもよろしいですか？
+        buttons:
+          search: 検索
       show:
         title: タスク詳細ページ
         labels:
