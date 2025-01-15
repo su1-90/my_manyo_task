@@ -18,10 +18,11 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '一覧表示機能' do
+    # let! を使用してテストデータを用意
     let!(:task1) { FactoryBot.create(:task, title: 'first_task', deadline_on: '2022-02-18', priority: :medium, status: :not_started) }
     let!(:task2) { FactoryBot.create(:task, title: 'second_task', deadline_on: '2022-02-17', priority: :high, status: :in_progress) }
     let!(:task3) { FactoryBot.create(:task, title: 'third_task', deadline_on: '2022-02-16', priority: :low, status: :completed) }
-
+    # beforeブロックを使用 共通のセットアップ
     before do
       visit tasks_path
     end
