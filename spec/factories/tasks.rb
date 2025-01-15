@@ -1,4 +1,12 @@
 FactoryBot.define do
+  factory :task do
+    title { '書類作成' }
+    content { '企画書を作成する' }
+    deadline_on { '2022-02-18' }
+    priority { :medium }
+    status { :not_started }
+  end
+  
   factory :first_task, class: Task do
     title { '書類作成' }
     content { '企画書を作成する。' }
