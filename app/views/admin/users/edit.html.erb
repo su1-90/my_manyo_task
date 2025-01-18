@@ -1,0 +1,40 @@
+<!-- app/views/admin/users/edit.html.erb -->
+<h1>ユーザ編集ページ</h1>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @user, url: admin_user_path(@user), local: true, method: :patch do |form| %>
+  <div>
+    <%= form.label :name, '名前' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :email, 'メールアドレス' %>
+    <%= form.email_field :email %>
+  </div>
+  <div>
+    <%= form.label :password, 'パスワード' %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation, 'パスワード（確認）' %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= form.label :admin, '管理者権限' %>
+    <%= form.check_box :admin %>
+  </div>
+  <div>
+    <%= form.submit '更新する', id: 'update-user' %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', admin_user_path(@user), id: 'back' %>

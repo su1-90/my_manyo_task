@@ -13,6 +13,8 @@
     <nav>
       <ul class="navbar-nav">
         <% if logged_in? %>
+          <li><a id ="users-index" href="<%= admin_users_path %>">ユーザ一覧</a></li>
+          <li><a id="add-user" href="<%= new_admin_user_path %>">ユーザを登録する</a></li>
           <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
           <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
           <li><a id="account-setting" href="<%= edit_user_path(current_user) %>">アカウント設定</a></li>
