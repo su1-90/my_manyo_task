@@ -1,19 +1,28 @@
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <title>CdpWebManyoTask</title>
-      <%= csrf_meta_tags %>
-      <%= csp_meta_tag %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CdpWebManyoTask</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    </head>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-    <body>
+  <body>
+    <nav>
       <ul class="navbar-nav">
-        <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
-        <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
+        <% if logged_in? %>
+          <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
+          <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
+          <li><a id="account-setting" href="<%= edit_user_path(current_user) %>">アカウント設定</a></li>
+          <li><a id="sign-out" href="<%= logout_path %>" data-method="delete">ログアウト</a></li>
+        <% else %>
+          <li><a id="sign-up" href="<%= new_user_path %>">アカウント登録</a></li>
+          <li><a id="sign-in" href="<%= new_session_path %>">ログイン</a></li>
+        <% end %>
       </ul>
-      <%= yield %>
-    </body>
-  </html>
+    </nav>
+    <%= yield %>
+  </body>
+</html>
