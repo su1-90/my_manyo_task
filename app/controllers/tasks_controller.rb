@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /tasks or /tasks.json
   def index
@@ -48,7 +49,14 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = current_user.tasks.build(task_params)
+    # @task = current_user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params) if current_user.present?
+    unless @task
+      flash[:alert] = 'ログインしてください'
+      redirect_to new_session_path
+      return
+    end
+
 
     respond_to do |format|
       if @task.save

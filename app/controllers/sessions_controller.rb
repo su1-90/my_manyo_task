@@ -7,12 +7,14 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
+      @current_user = user  # ここでcurrent_userを設定
       redirect_to tasks_path, notice: 'ログインしました'
     else
       flash.now[:alert] = 'メールアドレスまたはパスワードに誤りがあります'
       render :new
     end
   end
+  
 
   def destroy
     session[:user_id] = nil
