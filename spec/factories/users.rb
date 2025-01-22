@@ -9,7 +9,7 @@ FactoryBot.define do
 
   factory :admin_user, class: 'User' do
     name { '管理者ユーザ' }
-    email { 'admin@example.com' }
+    email { 'test_admin@example.com' }
     password { 'password' }
     password_confirmation { 'password' }
     admin { true }

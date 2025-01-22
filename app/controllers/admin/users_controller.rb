@@ -1,8 +1,8 @@
 module Admin 
   class Admin::UsersController < ApplicationController
-    before_action :require_login
+    skip_before_action :require_login, only: [:new, :create]
     before_action :admin_user
-    before_action :set_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_user, only: [:show, :edit, :update]
 
     def index
       @users = User.includes(:tasks)
@@ -40,14 +40,17 @@ module Admin
     
 
     def destroy
-      if User.where(admin: true).count == 1 && @user.admin?
+      @user = User.find(params[:id]) rescue nil
+      if @user.nil?
+        redirect_to admin_users_path, notice: 'ユーザは既に削除されています'
+      elsif User.where(admin: true).count == 1 && @user.admin?
         @user.errors.add(:base, "管理者が0人になるため削除できません")
         render :show
       else
         @user.destroy
-        redirect_to admin_user_path, notice: 'ユーザを削除しました'
+        redirect_to admin_users_path, notice: 'ユーザを削除しました'
       end
-    end
+    end    
 
     private
 

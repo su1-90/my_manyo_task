@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   helper_method :logged_in?, :current_user, :admin_user
   before_action :set_current_user
+  before_action :require_login
 
   def logged_in?
     !session[:user_id].nil?

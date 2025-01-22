@@ -1,5 +1,9 @@
 <h1>ユーザ詳細ページ</h1>
 
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <ul>

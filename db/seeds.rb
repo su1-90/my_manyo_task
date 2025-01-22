@@ -1,34 +1,41 @@
-# 50.times do |n|
-#   Task.create!(
-#     title: "タスクタイトル #{n+1}",
-#     content: "タスク内容 #{n+1}",
-#     created_at: Time.now,
-#     updated_at: Time.now
-#   )
-# end
-begin
-  admin_user = User.create!(
-    name: "Admin User",
-    email: "admin@example.com",
-    password: "password",
-    password_confirmation: "password",
-    admin: true
-  )
+# db/seeds.rb
 
+# 一般ユーザの作成
+user = User.find_or_create_by!(email: 'user@example.com') do |u|
+  u.name = '一般ユーザ'
+  u.password = 'password'
+  u.password_confirmation = 'password'
+  u.admin = false
+end
+
+# 管理者の作成
+admin = User.find_or_create_by!(email: 'admin@example.com') do |u|
+  u.name = '管理者ユーザ'
+  u.password = 'password'
+  u.password_confirmation = 'password'
+  u.admin = true
+end
+
+# 一般ユーザのタスクを50件作成
+50.times do |n|
   Task.create!(
-    [
-      { title: 'first_task', content: '任意の内容1', deadline_on: '2022-02-18', priority: :medium, status: :not_started },
-      { title: 'second_task', content: '任意の内容2', deadline_on: '2022-02-17', priority: :high, status: :in_progress },
-      { title: 'third_task', content: '任意の内容3', deadline_on: '2022-02-16', priority: :low, status: :completed },
-      { title: 'fourth_task', content: '任意の内容4', deadline_on: '2022-02-15', priority: :medium, status: :not_started },
-      { title: 'fifth_task', content: '任意の内容5', deadline_on: '2022-02-14', priority: :high, status: :in_progress },
-      { title: 'sixth_task', content: '任意の内容6', deadline_on: '2022-02-13', priority: :low, status: :completed },
-      { title: 'seventh_task', content: '任意の内容7', deadline_on: '2022-02-12', priority: :medium, status: :not_started },
-      { title: 'eighth_task', content: '任意の内容8', deadline_on: '2022-02-11', priority: :high, status: :in_progress },
-      { title: 'ninth_task', content: '任意の内容9', deadline_on: '2022-02-10', priority: :low, status: :completed },
-      { title: 'tenth_task', content: '任意の内容10', deadline_on: '2022-02-09', priority: :medium, status: :not_started }
-    ]
+    title: "一般ユーザのタスク#{n + 1}",
+    content: "一般ユーザのタスク#{n + 1}の詳細",
+    deadline_on: Date.today + n.days,
+    priority: [:low, :medium, :high].sample,
+    status: [:not_started, :in_progress, :completed].sample,
+    user: user
   )
-rescue ActiveRecord::RecordInvalid => e
-  puts e.record.errors.full_messages
+end
+
+# 管理者ユーザのタスクを50件作成
+50.times do |n|
+  Task.create!(
+    title: "管理者ユーザのタスク#{n + 1}",
+    content: "管理者ユーザのタスク#{n + 1}の詳細",
+    deadline_on: Date.today + n.days,
+    priority: [:low, :medium, :high].sample,
+    status: [:not_started, :in_progress, :completed].sample,
+    user: admin
+  )
 end
