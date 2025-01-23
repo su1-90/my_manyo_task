@@ -1,8 +1,8 @@
 module Admin 
-  class Admin::UsersController < ApplicationController
-    skip_before_action :require_login, only: [:new, :create]
-    before_action :admin_user
-    before_action :set_user, only: [:show, :edit, :update]
+  class UsersController < ApplicationController
+    before_action :require_login
+    before_action :require_admin
+    before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     def index
       @users = User.includes(:tasks)
@@ -38,7 +38,6 @@ module Admin
       end
     end
     
-
     def destroy
       @user = User.find(params[:id]) rescue nil
       if @user.nil?
@@ -60,6 +59,13 @@ module Admin
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+    end
+
+    def require_admin
+      unless current_user.admin?
+        flash[:alert] = '管理者以外はアクセスできません'
+        redirect_to(root_path)
+      end
     end
   end
 end
