@@ -7,8 +7,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを登録した場合' do
       before do
         visit new_session_path
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
+        fill_in 'session_email', with: user.email
+        fill_in 'session_password', with: user.password
         click_button 'ログイン'
 
         visit new_task_path
@@ -32,8 +32,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '一覧画面に遷移した場合' do
       before do
         visit new_session_path
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
+        fill_in 'session_email', with: user.email
+        fill_in 'session_password', with: user.password
         click_button 'ログイン'
 
         FactoryBot.create(:task, title: '最初のタスク', created_at: Time.now - 1.day, user: user)
@@ -50,8 +50,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '新たにタスクを作成した場合' do
       before do
         visit new_session_path
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
+        fill_in 'session_email', with: user.email
+        fill_in 'session_password', with: user.password
         click_button 'ログイン'
 
         FactoryBot.create(:task, title: '最初のタスク', user: user)
@@ -73,8 +73,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'ソート機能' do
     before do
       visit new_session_path
-      fill_in 'email', with: user.email
-      fill_in 'password', with: user.password
+      fill_in 'session_email', with: user.email
+      fill_in 'session_password', with: user.password
       click_button 'ログイン'
 
       @task1 = FactoryBot.create(:task, title: 'タスク1', deadline_on: '2025-01-15', priority: 'high', user: user)
@@ -102,8 +102,8 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '検索機能' do
     before do
       visit new_session_path
-      fill_in 'email', with: user.email
-      fill_in 'password', with: user.password
+      fill_in 'session_email', with: user.email
+      fill_in 'session_password', with: user.password
       click_button 'ログイン'
 
       @task1 = FactoryBot.create(:task, title: 'タスク1', status: 'not_started', user: user)
@@ -150,8 +150,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '任意のタスク詳細画面に遷移した場合' do
       before do
         visit new_session_path
-        fill_in 'email', with: user.email
-        fill_in 'password', with: user.password
+        fill_in 'session_email', with: user.email
+        fill_in 'session_password', with: user.password
         click_button 'ログイン'
         task = FactoryBot.create(:task, title: '詳細タスク', content: '詳細内容', user: user)
         visit task_path(task)

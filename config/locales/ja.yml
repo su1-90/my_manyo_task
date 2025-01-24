@@ -18,6 +18,16 @@ ja:
           not_started: "未着手"
           in_progress: "着手中"
           completed: "完了"
+    errors:
+      messages:
+        taken: "はすでに使用されています"
+      models:
+        user:
+          attributes:
+            password:
+              blank: "パスワードを入力してください"
+              too_short: "パスワードは6文字以上で入力してください"
+              confirmation: "パスワード（確認）とパスワードの入力が一致しません"
   views:
     layout:
       navbar:
@@ -82,6 +92,9 @@ ja:
     messages:
       blank: "%{attribute}を入力してください"
       blank_no_attribute: "を入力してください"
+      taken: "はすでに使用されています"
+      too_short: "は%{count}文字以上で入力してください"
+      confirmation: "と%{attribute}の入力が一致しません"
       deadline_on_blank: "を入力してください"
       priority_blank: "を入力してください"
       status_blank: "を入力してください"

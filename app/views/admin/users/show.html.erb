@@ -37,8 +37,8 @@
         <td><%= task.content %></td>
         <td><%= task.created_at %></td>
         <td><%= task.deadline_on %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.status %></td>
+        <td><%= I18n.t("activerecord.attributes.task.priority_values.#{task.priority}") %></td>
+        <td><%= I18n.t("activerecord.attributes.task.status_values.#{task.status}") %></td>
       </tr>
     <% end %>
   </tbody>

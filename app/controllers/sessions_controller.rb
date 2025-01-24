@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   before_action :redirect_if_logged_in, only: [:new, :create]
-  skip_before_action :require_login, only: [:new, :create,]
+  skip_before_action :require_login, only: [:new, :create]
   def new
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    if user&.authenticate(params[:password])
+    user = User.find_by(email: params.dig(:session, :email))
+    if user&.authenticate(params.dig(:session, :password))
       session[:user_id] = user.id
       @current_user = user
       redirect_to tasks_path, notice: 'ログインしました'

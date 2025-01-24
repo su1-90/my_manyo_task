@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_login, except: [:new, :create]
-  before_action :redirect_if_logged_in, only: [:new, :create]
+  before_action :redirect_if_logged_in, only: [:new]
 
   def new
     @user = User.new
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to @user, notice: 'アカウントを登録しました'
+      redirect_to tasks_path, notice: 'アカウントを登録しました'
     else
       render :new
     end

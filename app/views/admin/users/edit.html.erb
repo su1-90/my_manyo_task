@@ -1,11 +1,12 @@
-<!-- app/views/admin/users/edit.html.erb -->
 <h1>ユーザ編集ページ</h1>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
     <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% @user.errors.messages.each do |attribute, messages| %>
+        <% messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
@@ -37,4 +38,4 @@
   </div>
 <% end %>
 
-<%= link_to '戻る', admin_user_path(@user), id: 'back' %>
+<%= link_to '戻る', admin_users_path, id: 'back' %>
