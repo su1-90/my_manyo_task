@@ -9,10 +9,10 @@ RSpec.describe 'ユーザ管理機能', type: :system do
     context 'ユーザを登録した場合' do
       it 'タスク一覧画面に遷移する' do
         visit new_user_path
-        fill_in 'session_name', with: '新規ユーザ'
-        fill_in 'session_email', with: 'new@example.com'
-        fill_in 'session_password', with: 'password'
-        fill_in 'session_password_confirmation', with: 'password'
+        fill_in 'user_name', with: '新規ユーザ'
+        fill_in 'user_email', with: 'new@example.com'
+        fill_in 'user_password', with: 'password'
+        fill_in 'user_password_confirmation', with: 'password'
         click_button '登録する'
         expect(page).to have_content 'タスク一覧'
       end
@@ -77,11 +77,11 @@ RSpec.describe 'ユーザ管理機能', type: :system do
 
       it '管理者を登録できる' do
         visit new_admin_user_path
-        fill_in 'session_name', with: '新規管理者'
-        fill_in 'session_email', with: 'new_admin@example.com'
-        fill_in 'session_password', with: 'password'
-        fill_in 'session_password_confirmation', with: 'password'
-        check 'session_admin'
+        fill_in 'user_name', with: '新規管理者'
+        fill_in 'user_email', with: 'new_admin@example.com'
+        fill_in 'user_password', with: 'password'
+        fill_in 'user_password_confirmation', with: 'password'
+        check 'user_admin'
         click_button '登録する'
         expect(page).to have_content '新規管理者'
         expect(page).to have_content 'ユーザを登録しました'
