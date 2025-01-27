@@ -1,29 +1,37 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    if current_user
+      @tasks = current_user.tasks
 
-    if params[:search].present?
-      if params[:search][:title].present? && params[:search][:status].present?
-        @tasks = @tasks.search_by_title_and_status(params[:search][:title], params[:search][:status])
-      elsif params[:search][:title].present?
-        @tasks = @tasks.search_by_title(params[:search][:title])
-      elsif params[:search][:status].present?
-        @tasks = @tasks.search_by_status(params[:search][:status])
+      if params[:search].present?
+        if params[:search][:title].present? && params[:search][:status].present?
+          @tasks = @tasks.search_by_title_and_status(params[:search][:title], params[:search][:status])
+        elsif params[:search][:title].present?
+          @tasks = @tasks.search_by_title(params[:search][:title])
+        elsif params[:search][:status].present?
+          @tasks = @tasks.search_by_status(params[:search][:status])
+        end
       end
-    end
 
-    if params[:sort_deadline_on]
-      @tasks = @tasks.sorted_by_deadline
-    elsif params[:sort_priority]
-      @tasks = @tasks.sorted_by_priority
+      if params[:sort_deadline_on]
+        @tasks = @tasks.sorted_by_deadline
+      elsif params[:sort_priority]
+        @tasks = @tasks.sorted_by_priority
+      else
+        @tasks = @tasks.sorted_by_creation
+      end
+
+      @tasks = @tasks.page(params[:page])
+      
     else
-      @tasks = @tasks.sorted_by_creation
+      flash[:alert] = 'ログインしてください'
+      redirect_to new_session_path
     end
-
-    @tasks = @tasks.page(params[:page])
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -41,7 +49,14 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    # @task = current_user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params) if current_user.present?
+    unless @task
+      flash[:alert] = 'ログインしてください'
+      redirect_to new_session_path
+      return
+    end
+
 
     respond_to do |format|
       if @task.save
@@ -86,5 +101,13 @@ class TasksController < ApplicationController
     # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    end
+
+    def correct_user
+      @task = current_user.tasks.find_by(id: params[:id])
+      unless @task
+        flash[:alert] = 'アクセス権限がありません'
+        redirect_to tasks_path
+      end
     end
 end

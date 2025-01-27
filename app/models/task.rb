@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user
+  
   validates :title, presence: { message: I18n.t('errors.messages.blank_no_attribute') }
   validates :content, presence: { message: I18n.t('errors.messages.blank_no_attribute') }
   validates :deadline_on, presence: { message: I18n.t('errors.messages.deadline_on_blank') }
