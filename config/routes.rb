@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
   root 'tasks#index'
+
+  # 500エラーページ表示用
+  get 'raise_error', to: 'application#raise_error'
 end

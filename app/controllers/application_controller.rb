@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user
   before_action :require_login
 
+  # 500エラーページ表示用
+  def raise_error
+    raise "意図的なエラー"
+  end
+
   def logged_in?
     !session[:user_id].nil?
   end
