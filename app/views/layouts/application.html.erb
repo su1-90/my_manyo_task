@@ -18,10 +18,14 @@
             <li><a id="add-user" href="<%= new_admin_user_path %>">ユーザを登録する</a></li>
             <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
             <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
+            <li><a id="labels-index" href="<%= labels_path %>">ラベル一覧</a></li>
+            <li><a id="new-label" href="<%= new_label_path %>">ラベルを登録する</a></li>
             <li><a id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a></li>
           <% else %>
             <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
             <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
+            <li><a id="labels-index" href="<%= labels_path %>">ラベル一覧</a></li>
+            <li><a id="new-label" href="<%= new_label_path %>">ラベルを登録する</a></li>
             <li><a id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a></li>
           <% end %>
           <li><a id="sign-out" href="<%= logout_path %>" data-method="delete">ログアウト</a></li>
