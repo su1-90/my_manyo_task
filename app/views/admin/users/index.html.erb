@@ -1,6 +1,6 @@
 <h1>ユーザ一覧ページ</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>名前</th>
@@ -18,9 +18,9 @@
         <td><%= user.admin? ? 'あり' : 'なし' %></td>
         <td><%= user.tasks.count %></td>
         <td>
-          <%= link_to '詳細', admin_user_path(user), class: 'show-user' %>
-          <%= link_to '編集', edit_admin_user_path(user), class: 'edit-user' %>
-          <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'destroy-user' %>
+          <%= link_to '詳細', admin_user_path(user), class: 'show-user', class: "btn btn-info" %>
+          <%= link_to '編集', edit_admin_user_path(user), class: 'edit-user', class: "btn btn-warning" %>
+          <%= link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'destroy-user', class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>
