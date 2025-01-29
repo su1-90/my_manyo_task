@@ -1,5 +1,3 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <h1><%= t("views.tasks.index.title") %></h1>
 
 <%= form_with scope: :search, local: true, method: :get do |form| %>
@@ -11,6 +9,11 @@
   <div class="field">
     <%= form.label :title, t("views.tasks.index.headers.title") %>
     <%= form.text_field :title, value: params.dig(:search, :title) %>
+  </div>
+
+  <div>
+    <%= form.label :label, 'ラベル' %>
+    <%= form.select :label, options_from_collection_for_select(Label.all, :id, :name, params.dig(:search, :label)), include_blank: true %>
   </div>
 
   <div class="actions">

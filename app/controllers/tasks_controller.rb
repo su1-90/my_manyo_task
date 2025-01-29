@@ -16,7 +16,13 @@ class TasksController < ApplicationController
         elsif params[:search][:status].present?
           @tasks = @tasks.search_by_status(params[:search][:status])
         end
+        
+        if params[:search][:label].present?
+          label = current_user.labels.find(params[:search][:label])
+          @tasks = label.tasks
+        end
       end
+
 
       if params[:sort_deadline_on]
         @tasks = @tasks.sorted_by_deadline
