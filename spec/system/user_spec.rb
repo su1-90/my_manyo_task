@@ -106,7 +106,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
 
       it 'ユーザを削除できる' do
         visit admin_users_path
-        link_xpath = "//tr[td[contains(text(), '削除対象ユーザー')]]//a[contains(@class, 'destroy-user')]"
+        link_xpath = "//tr[td[contains(text(), '削除対象ユーザー')]]//a[@data-method='delete']"
         puts "削除リンク: #{link_xpath}"
       
         accept_confirm do
