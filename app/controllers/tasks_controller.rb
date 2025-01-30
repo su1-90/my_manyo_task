@@ -16,7 +16,13 @@ class TasksController < ApplicationController
         elsif params[:search][:status].present?
           @tasks = @tasks.search_by_status(params[:search][:status])
         end
+        
+        if params[:search][:label].present?
+          label = current_user.labels.find(params[:search][:label])
+          @tasks = label.tasks
+        end
       end
+
 
       if params[:sort_deadline_on]
         @tasks = @tasks.sorted_by_deadline
@@ -100,7 +106,7 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+      params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, label_ids: [])
     end
 
     def correct_user

@@ -1,5 +1,3 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <h1><%= t("views.tasks.index.title") %></h1>
 
 <%= form_with scope: :search, local: true, method: :get do |form| %>
@@ -13,12 +11,17 @@
     <%= form.text_field :title, value: params.dig(:search, :title) %>
   </div>
 
+  <div>
+    <%= form.label :label, 'ラベル' %>
+    <%= form.select :label, options_from_collection_for_select(Label.all, :id, :name, params.dig(:search, :label)), include_blank: true %>
+  </div>
+
   <div class="actions">
-    <%= form.submit t("views.tasks.index.buttons.search"), id: 'search_task' %>
+    <%= form.submit t("views.tasks.index.buttons.search"), class: "btn btn-primary", id: 'search_task' %>
   </div>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th ><%= t("views.tasks.index.headers.title") %></th>
@@ -40,9 +43,9 @@
         <td><%= task.deadline_on %></td>
         <td><%= I18n.t("activerecord.attributes.task.priority_values.#{task.priority}") %></td>
         <td><%= I18n.t("activerecord.attributes.task.status_values.#{task.status}") %></td>
-        <td class="show-task"><%= link_to t("views.tasks.index.links.show"), task %></td>
-        <td class="edit-task"><%= link_to t("views.tasks.index.links.edit"), edit_task_path(task) %></td>
-        <td class="destroy-task"><%= link_to t("views.tasks.index.links.destroy"), task, method: :delete, data: { confirm: t('viewes.tasks.index.dialogs.destroy_confirm') } %></td>
+        <td class="show-task"><%= link_to t("views.tasks.index.links.show"), task, class: "btn btn-info" %></td>
+        <td class="edit-task"><%= link_to t("views.tasks.index.links.edit"), edit_task_path(task), class: "btn btn-warning" %></td>
+        <td class="destroy-task"><%= link_to t("views.tasks.index.links.destroy"), task, method: :delete, data: { confirm: t('viewes.tasks.index.dialogs.destroy_confirm') }, class: "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

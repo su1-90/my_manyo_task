@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validate :check_password_presence
 
   has_many :tasks, dependent: :destroy
+  has_many :labels
 
   before_save :downcase_email
   

@@ -1,44 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CdpWebManyoTask</title>
+    <title>Task Management App</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
 
   <body>
-    <nav>
-      <ul class="navbar-nav">
-        <% if logged_in? %>
-          <% if current_user.admin? %>
-            <li><a id="users-index" href="<%= admin_users_path %>">ユーザ一覧</a></li>
-            <li><a id="add-user" href="<%= new_admin_user_path %>">ユーザを登録する</a></li>
-            <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
-            <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
-            <li><a id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Task App</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <% if logged_in? %>
+            <% if current_user.admin? %>
+              <a class="nav-item nav-link" id="users-index" href="<%= admin_users_path %>">ユーザ一覧</a>
+              <a class="nav-item nav-link" id="add-user" href="<%= new_admin_user_path %>">ユーザを登録する</a>
+              <a class="nav-item nav-link" id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a>
+              <a class="nav-item nav-link" id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a>
+              <a class="nav-item nav-link" id="labels-index" href="<%= labels_path %>">ラベル一覧</a>
+              <a class="nav-item nav-link" id="new-label" href="<%= new_label_path %>">ラベルを登録する</a>
+              <a class="nav-item nav-link" id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a>
+            <% else %>
+              <a class="nav-item nav-link" id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a>
+              <a class="nav-item nav-link" id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a>
+              <a class="nav-item nav-link" id="labels-index" href="<%= labels_path %>">ラベル一覧</a>
+              <a class="nav-item nav-link" id="new-label" href="<%= new_label_path %>">ラベルを登録する</a>
+              <a class="nav-item nav-link" id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a>
+            <% end %>
+            <a class="nav-item nav-link" id="sign-out" href="<%= logout_path %>" data-method="delete">ログアウト</a>
           <% else %>
-            <li><a id="tasks-index" href="/"><%= t("views.layout.navbar.tasks_index") %></a></li>
-            <li><a id="new-task" href="/tasks/new"><%= t("views.layout.navbar.new_task") %></a></li>
-            <li><a id="account-setting" href="<%= user_path(current_user) %>">アカウント設定</a></li>
+            <a class="nav-item nav-link" id="sign-up" href="<%= new_user_path %>">アカウント登録</a>
+            <a class="nav-item nav-link" id="sign-in" href="<%= new_session_path %>">ログイン</a>
           <% end %>
-          <li><a id="sign-out" href="<%= logout_path %>" data-method="delete">ログアウト</a></li>
-        <% else %>
-          <li><a id="sign-up" href="<%= new_user_path %>">アカウント登録</a></li>
-          <li><a id="sign-in" href="<%= new_session_path %>">ログイン</a></li>
-        <% end %>
-      </ul>
+        </div>
+      </div>
     </nav>
-    
-    <% if flash[:alert] %>
-      <div class="alert"><%= flash[:alert] %></div>
-    <% end %>
-    <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-    <% end %>
 
-    <%= yield %>
+    <div class="container mt-4">
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class="alert alert-success"><%= flash[:notice] %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

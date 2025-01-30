@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :labelings
+  has_many :labels, through: :labelings
   
   validates :title, presence: { message: I18n.t('errors.messages.blank_no_attribute') }
   validates :content, presence: { message: I18n.t('errors.messages.blank_no_attribute') }

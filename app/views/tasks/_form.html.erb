@@ -10,36 +10,46 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :title, t("views.tasks.new.labels.title") %>
-    <%= form.text_field :title, id: 'task_title' %>
+    <%= form.text_field :title, id: 'task_title', class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :content, t("views.tasks.new.labels.content") %>
-    <%= form.text_area :content, id: 'task_content' %>
+    <%= form.text_area :content, id: 'task_content', class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :deadline_on, t("views.tasks.new.labels.deadline_on") %>
-    <%= form.date_field :deadline_on, id: 'task_deadline_on' %>
+    <%= form.date_field :deadline_on, id: 'task_deadline_on', class: "form-control" %>
   </div>
 
-<div class="field">
+<div class="field form-group">
   <%= form.label :priority, t("views.tasks.new.labels.priority") %>
-  <%= form.select :priority, I18n.t('activerecord.attributes.task.priority_values').invert.to_a, { include_blank: true, selected: nil } %>
+  <%= form.select :priority, I18n.t('activerecord.attributes.task.priority_values').invert.to_a, { include_blank: true, selected: nil }, class: "form-control" %>
 </div>
 
-<div class="field">
+<div class="field form-group">
   <%= form.label :status, t("views.tasks.new.labels.status") %>
-  <%= form.select :status, I18n.t('activerecord.attributes.task.status_values').invert.to_a, { include_blank: true, selected: nil } %>
+  <%= form.select :status, I18n.t('activerecord.attributes.task.status_values').invert.to_a, { include_blank: true, selected: nil }, class: "form-control" %>
 </div>
+
+<div class="field form-group">
+  <%= form.label :labels,t("views.tasks.new.labels.labels") %>
+  <%= form.collection_check_boxes :label_ids, Label.all, :id, :name do |b| %>
+    <div class="checkbox form-check">
+      <%= b.check_box class: "form-check-input" %>
+      <%= b.label class: "form-check-label" %>
+    </div>
+  <% end %>
+</div>  
 
   <div class="actions">
     <% if task.new_record? %>
-      <%= form.submit t("views.tasks.new.buttons.create"), id: 'create-task' %>
+      <%= form.submit t("views.tasks.new.buttons.create"), id: 'create-task', class: "btn btn-primary" %>
     <% else %>
-      <%= form.submit t("views.tasks.edit.buttons.update"), id: 'update-task' %>
+      <%= form.submit t("views.tasks.edit.buttons.update"), id: 'update-task', class: "btn btn-primary" %>
     <% end %>
   </div>
 <% end %>
